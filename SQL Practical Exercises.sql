@@ -43,6 +43,25 @@ SELECT COUNT(*)
 FROM POST
 WHERE status = 'published';
 
+-- COUNT() with GROUP BY - Articles by Category Count the number of articles per category.
+SELECT id_category, COUNT(*) AS TOTALPOSTS
+FROM POST
+GROUP BY id_category;
 
+-- AVG() - Average Article Length Calculate the average length (in characters) of published articles.
+SELECT AVG(CHAR_LENGTH(content)) AS avglenght
+FROM POST
+WHERE status = 'published';
 
+-- MAX()/MIN() - Extreme Dates The date of the **last** published article.
+SELECT MAX(creation_date) AS lastpostdate
+FROM POST
+WHERE status = 'published';
 
+-- MAX()/MIN() - - The date of the **first** comment in the system.
+SELECT MIN(creation_date) AS firstcomment
+FROM COMMENTS;
+
+-- SUM() - Total Views Calculate the total number of views for all articles (If you have a view_count column).
+SELECT SUM(view_count) AS totalveiws
+FROM POST;
