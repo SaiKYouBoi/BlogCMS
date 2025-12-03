@@ -69,7 +69,8 @@ CREATE TABLE POST(
     content TEXT),
     creation_date DATE NOT NULL,
     update_date DATE,
-    status VARCHAR(50) NOT NULL,
+    status VARCHAR(10)
+    CHECK (status IN ('published', 'draft'));,
     view_count VARCHAR(50) NOT NULL,
     id_user INT NOT NULL,
     id_category INT NOT NULL,
@@ -83,10 +84,23 @@ CREATE TABLE COMMENTS(
 	id_comment INT PRIMARY KEY AUTO_INCREMENT,
     contenu_commentaire VARCHAR(50),
     creation_date DATE NOT NULL,
-    status VARCHAR(50) NOT NULL,
+    status VARCHAR(10)
+    CHECK (status IN ('spam', 'pending', 'approved'));,
     id_user INT NOT NULL,
     id_post INT NOT NULL,
     
     FOREIGN KEY (id_user) REFERENCES USER(id_user),
     FOREIGN KEY (id_article) REFERENCES POST(id_post)
 );
+
+--INSERTION IN TABLES
+
+INSERT INTO CATEGORY (id_category, name, description) VALUES
+(1, 'Technologie', 'Actualités, tutoriels et analyses sur les nouvelles technologies'),
+(2, 'Santé', 'Conseils santé, bien-être et médecine préventive'),
+(3, 'Voyage', 'Récits de voyage, guides pratiques et conseils touristiques'),
+(4, 'Cuisine', 'Recettes, techniques culinaires et astuces de cuisine'),
+(5, 'Sport', 'Actualités sportives, conseils d\'entraînement et nutrition'),
+(6, 'Éducation', 'Pédagogie, conseils d\'apprentissage et innovations éducatives'),
+(7, 'Finance', 'Gestion budgétaire, investissements et actualités économiques'),
+(8, 'Mode', 'Tendances, conseils style et actualités de la mode');
